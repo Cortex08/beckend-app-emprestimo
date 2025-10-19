@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: financontrol-api
+    env: docker
+    repo: <your-repo-url>
+    plan: starter
+    buildCommand: ""
+    startCommand: gunicorn -c gunicorn_conf.py backend.main:app
+    envVars:
+      - key: DATABASE_URL
+        value: postgresql://finan_user:finan_pass@{RENDER_POSTGRES_HOST}:5432/financontrol
+      - key: SECRET_KEY
+        value: replace-this-with-a-very-secret-key
+  - type: postgres
+    name: financontrol-db
+    plan: starter
+    envVars:
+      - key: POSTGRES_DB
+        value: financontrol
+      - key: POSTGRES_USER
+        value: finan_user
+      - key: POSTGRES_PASSWORD
+        value: finan_pass

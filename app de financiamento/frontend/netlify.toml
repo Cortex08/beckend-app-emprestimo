@@ -1,0 +1,15 @@
+[build]
+  publish = "static"
+  command = ""
+
+[dev]
+  command = "live-server static --port=8888"
+  port = 8888
+
+[redirects]
+  # Proxy /api to the external backend when running on Netlify (replace with your actual backend URL)
+  [[redirects]]
+    from = "/api/*"
+    to = "https://financontrol-api.onrender.com/:splat"
+    status = 200
+    force = true
